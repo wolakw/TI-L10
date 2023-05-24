@@ -13,6 +13,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="TI-lab10" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="googlecode.json.simple" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/ti-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />

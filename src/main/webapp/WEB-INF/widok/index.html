@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <script type="text/javascript" src="skrypt.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>TI-Lab 10</title>
+</head>
+<body>
+<div id="kontener">
+    <div id="lewa">
+        <h4>Wpisz markę samochodu (AJAX)</h4>
+        <input id="pole" type="text" onkeyup="javascript:pobierzSugestie();" />
+        <div id="wyniki"></div>
+    </div>
+    <div id="prawa">
+        <h4>Wpisz markę samochodu (jQuery)</h4>
+        <input id="pole2" type="text" onkeyup="javascript:pobierzSugestiejQuery();" />
+        <div id="wyniki2"></div>
+    </div>
+</div>
+</body>
+</html>
