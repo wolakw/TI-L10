@@ -44,7 +44,7 @@ public class sugestie extends HttpServlet {
         ArrayList<String> sugestia = new ArrayList<>();
         try {
             for (String samochod : lista) {
-                if (samochod.startsWith((query))) {
+                if (samochod.startsWith((query.toUpperCase()))) {
                     sugestia.add(samochod);
                 }
             }
