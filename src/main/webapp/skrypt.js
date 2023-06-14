@@ -99,18 +99,57 @@ function wyslijAsynchronicznie(url, metoda, typDanych, przesylanyDokument) {
 //         "wartosc="+wartosc);
 // }
 
-function  pobierzSugestie() {
-    let wartosc = { wartosc: document.getElementById("pole").value };
-    wyslijAsynchronicznie("sugestie", "POST", "application/json", JSON.stringify(wartosc));
+function wybierzSugestie(sugestia) {
+    document.getElementById("pole").value = sugestia; // Uzupełnij treść inputa wybraną sugestią
+    document.getElementById("wyniki").style.display = "none"; // Ukryj div z wynikami
+    document.getElementById("wyniki").innerHTML = ""; // Wyczyść zawartość diva z wynikami
+}
+
+function wybierzSugestiejQuery(sugestia) {
+    $('#pole2').val(sugestia); // Uzupełnij treść inputa wybraną sugestią
+    $('#wyniki2').css("display", "none"); // Ukryj div z wynikami
+    $('#wyniki2').html(""); // Wyczyść zawartość diva z wynikami
+}
+
+function pobierzSugestie() {
+    let poleTekstowe = document.getElementById("pole");
+    let wartosc = poleTekstowe.value.trim();
+
+    if (wartosc === "") {
+        // Czyść div z wynikami
+        let wynikiDiv = document.getElementById("wyniki");
+        wynikiDiv.style.display = "none";
+        wynikiDiv.innerHTML = "";
+        return;
+    }
+
+    let wartoscObj = { wartosc: wartosc };
+    wyslijAsynchronicznie("sugestie", "POST", "application/json", JSON.stringify(wartoscObj));
+
 }
 
 function  pobierzSugestiejQuery() {
-    let parametry = new Object();
-    parametry.wartosc = $('#pole2').val();
+    // let parametry = new Object();
+    // parametry.wartosc = $('#pole2').val();
 
-    let parametry2 = {
-        "wartosc": $('#pole2').val()
+    let poleTekstowe = $('#pole2');
+    let wartosc = poleTekstowe.val().trim();
+
+    if (wartosc === "") {
+        // Czyść div z wynikami
+        let wynikiDiv = $('#wyniki2');
+        wynikiDiv.css("display", "none");
+        wynikiDiv.html("");
+        return;
     }
+
+    let parametry = {
+        "wartosc": wartosc
+    }
+
+    // let parametry2 = {
+    //     "wartosc": $('#pole2').val()
+    // }
 
     $('#wyniki2').css("display", "block").html("");
 
@@ -124,7 +163,7 @@ function  pobierzSugestiejQuery() {
         success: function (data) {
             $("#wyniki2").html("");
             $.each(data.sugestia, function (index, wynik) {
-                $("#wyniki2").append('<div class="lista">' + wynik + '</div>');
+                $("#wyniki2").append('<div class="lista" onclick="wybierzSugestiejQuery(this.innerHTML)">' + wynik + '</div>');
             })
         },
         error: function (response) {
